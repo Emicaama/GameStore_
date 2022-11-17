@@ -24,6 +24,7 @@
                                 <h5 class="card-title">
                                     @item.nombreJuego
                                     <a class="text-white float-right" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
+                                    <a class="text-white" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i> </a>
                                 </h5>
                             </p>
                         </div>
@@ -44,6 +45,7 @@
                             <p class="card-text">
                                 <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i>Detalles </a> |
                                 <a class="btn btn-success text-white"><i class="bi bi-cart-plus"></i> Add to Cart (Price @item.precio.ToString("c"))</a>
+
                             </p>
                         </div>
                     </div>
