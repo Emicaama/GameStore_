@@ -1,0 +1,73 @@
+﻿@model PaginatedList<GameStore.Models.Empresa>
+@{
+    ViewData["Title"] = "Empresas";
+}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Buscar <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Buscar" class="btn btn-default" /> |
+            <a asp-action="Index">Volver a lista</a>
+        </p>
+    </div>
+    </form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Logo
+                </th>
+                <th>
+                    Descripcion
+                </th>
+                <th>
+                    Nombre
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td class="align-middle">
+                    <img src="@item.empresaFotoUrl" alt="@item.nombreEmpresa" style="max-width: 150px" />
+                </td>
+                <td class="align-middle">
+                    @Html.DisplayFor(modelItem => item.descripcion)
+                </td>
+                <td class="align-middle">
+                    @Html.DisplayFor(modelItem => item.nombreEmpresa)
+                </td>
+                <td class="align-middle">
+                <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i>Editar </a> |
+                <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i>Detalles </a> |
+                <a class="btn btn-danger text-white" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i>Borrar </a>
+            </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    @{
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+        }
+
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-pageNumber="@(Model.PageIndex - 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-default @prevDisabled">
+            Previous
+        </a>
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-pageNumber="@(Model.PageIndex + 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-default @nextDisabled">
+            Next
+        </a>
+    </div>
+</div>
+@await Html.PartialAsync("Agregar", "Empresas") 

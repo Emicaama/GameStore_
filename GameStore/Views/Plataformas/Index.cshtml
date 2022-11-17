@@ -1,0 +1,39 @@
+﻿@model IEnumerable<GameStore.Models.Plataforma>
+@{
+    ViewData["Title"] = "Plataformas";
+}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.plataformaFotoUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nombrePlataforma)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td class="align-middle">
+                <img src="@item.plataformaFotoUrl" alt="@item.nombrePlataforma" style="max-width: 150px" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombrePlataforma)
+            </td>
+            <td class="align-middle">
+                <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i>Editar </a> |
+                <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i>Detalles </a> |
+                <a class="btn btn-danger text-white" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i>Borrar </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>
+</div>
+@await Html.PartialAsync("Agregar", "Plataformas") 

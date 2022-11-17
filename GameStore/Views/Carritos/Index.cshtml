@@ -1,0 +1,48 @@
+﻿@model IEnumerable<GameStore.Models.Carrito>
+
+@{
+    ViewData["Title"] = "Carrito";
+}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.imagenJuego)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.nombre)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.resumen)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+        @foreach (var item in Model) {
+                <tr>
+                    <td class="align-middle text-center">
+                            @if (!string.IsNullOrEmpty(item.imagenJuego))
+                            {
+                                <img src="~/pictures/img-tienda/@item.imagenJuego" class="rounded-circle" style="max-width:150px" asp-append-version="true" />
+                            }
+                    </td>
+                        <td class="align-middle text-center">
+                        @Html.DisplayFor(modelItem => item.nombre)
+                    </td>
+                        <td class="align-middle text-center">
+                            <a href="@Html.DisplayFor(modelItem => item.resumen)" target="_blank">@Html.DisplayFor(modelItem => item.resumen)</a>
+                    </td>
+                    <td class="text-lg-end align-middle">
+                            <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.idTienda"><i class="bi bi-pencil-square"></i>Editar</a> |
+                            <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.idTienda"><i class="bi bi-eye"></i>Detalles</a> |
+                            <a class="btn btn-danger text-white" asp-action="Delete" asp-route-id="@item.idTienda"><i class="bi bi-trash"></i>Eliminar</a>
+                    </td>
+                </tr>
+        }
+            </tbody>
+        </table>
+    </div>
+</div>

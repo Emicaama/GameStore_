@@ -1,0 +1,55 @@
+﻿@model IEnumerable<GameStore.Models.Juego>
+
+@{
+    ViewData["Title"] = "Juegos";
+}
+<form asp-action="Filter" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
+</form>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 col-xs-6 border-primary mb-3">
+            <div class="card mb-3" style="max-width: 800px;">
+                <div class="row g-0">
+                    <div class="col-md-12">
+                        <div class="card-header text-white bg-info">
+                            <p class="card-text">
+                                <h5 class="card-title">
+                                    @item.nombreJuego
+                                    <a class="text-white float-right" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
+                                </h5>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="@item.juegoFotoUrl" width="200%" alt="@item.nombreJuego">
+                    </div>
+                    <div class="row g-1">
+                        <div class="card-body">
+                            <p class="card-text" style="font-size:smaller">@item.descripcion</p>
+                            <p class="card-text"><b>Genero: </b>@item.Genero.nombreGenero</p>
+                            <p class="card-text"><b>Empresa: </b>@item.Empresa.nombreEmpresa</p>
+                            <p class="card-text"><b>Fecha Publicacion: </b>@item.fechaPublicacion.ToString("dd MMM yy")</p>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card-footer ">
+                            <p class="card-text">
+                                <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i>Detalles </a> |
+                                <a class="btn btn-success text-white"><i class="bi bi-cart-plus"></i> Add to Cart (Price @item.precio.ToString("c"))</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@await Html.PartialAsync("Agregar", "Juegos") 

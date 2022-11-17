@@ -1,0 +1,47 @@
+﻿@model Empresa
+
+@{
+    ViewData["Title"] = "Detalles Empresa";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <div class="card mb-12">
+            <div class="row g-0">
+                <div class="col-md-12">
+                    <div class="card-header text-white bg-info">
+                        <p class="card-text">
+                            <h5 class="card-title">
+                                @Model.nombreEmpresa
+                            </h5>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <img src="@Model.empresaFotoUrl" width="100%" style="padding: 1rem" alt="@Model.nombreEmpresa">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <p class="card-text">
+                            <b>Empresa: </b>
+                            @Model.nombreEmpresa
+                        </p>
+                <p class="card-text">
+                            <b>Descripcion: </b>
+                            @Model.descripcion
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="card-footer">
+                        <p class="card-text">
+                            <a class="btn btn-outline-primary float-right" asp-action="Index">
+                                Volver a lista
+                            </a>
+                            </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
